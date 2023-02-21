@@ -19,13 +19,13 @@ use App\Http\Controllers\DemoController;
 // });
 // app/Http/routes.php | app/routes/web.php
 
-Route::get('/', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+// Route::get('/', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 
-    $fpdf->AddPage();
-    $fpdf->SetFont('Courier', 'B', 18);
-    $fpdf->Cell(50, 25, 'Hello World!');
-    $fpdf->Output();
-    exit;
-});
-
+//     $fpdf->AddPage();
+//     $fpdf->SetFont('Courier', 'B', 18);
+//     $fpdf->Cell(50, 25, 'Hello World!');
+//     $fpdf->Output();
+//     exit;
+// });
+Route::get('/', [DemoController::class, 'datatabel']);
 Route::get('fill-data-pdf', [DemoController::class, 'index']);
