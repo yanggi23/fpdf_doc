@@ -27,5 +27,8 @@ use App\Http\Controllers\DemoController;
 //     $fpdf->Output();
 //     exit;
 // });
-Route::get('/', [DemoController::class, 'datatabel']);
+Route::get('/', [DemoController::class, 'datatabel'])->name('allsurat');;
 Route::get('fill-data-pdf/{id}', [DemoController::class, 'index']);
+
+Route::get('/add-surat', [DemoController::class, 'create']);
+Route::post('insert-surat',[DemoController::class, 'store']);

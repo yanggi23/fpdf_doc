@@ -439,7 +439,7 @@
                         <ul class="breadcrumb">
                             <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
                             <li><a href="datatable_basic.html">Datatables</a></li>
-                            <li class="active">Basic</li>
+                            <li class="active">Tambah Surat Keterangan</li>
                         </ul>
 
                         {{-- <ul class="breadcrumb-elements">
@@ -472,7 +472,7 @@
                     <!-- Basic datatable -->
                     <div class="panel panel-flat">
                         <div class="panel-heading">
-                            <h5 class="panel-title">Data Surat Keterangan Security Clearance</h5>
+                            <h5 class="panel-title">Tambah Data Surat Keterangan Security Clearance</h5>
                             {{-- <div class="heading-elements">
                                 <ul class="icons-list">
                                     <li><a data-action="collapse"></a></li>
@@ -483,68 +483,97 @@
                         </div>
 
                         <div class="panel-body">
-                            <a href="{{url('/add-surat')}}" type="button" class="btn btn-primary">Tambah</a>
-                            <div class="table-responsive">
-                                <table class="table datatable-basic">
-                                    <thead>
-                                        <tr>
-                                            {{-- <th>Berdasarkan</th> --}}
-                                            <th>No</th>
-                                            <th>Warga Negara</th>
-                                            <th>Nama</th>
-                                            <th>Jabatan</th>
-                                            <th>Tgl lahir</th>
-                                            <th>Kebangsaan</th>
-                                            <th>No Paspor</th>
-                                            <th>Tujuan</th>
-                                            <th>Keperluan</th>
-                                            <th>Berlaku</th>
-                                            {{-- <th>Tempat Surat</th>
-                                            <th>Tanggal Surat</th>
-                                            <th>Ditujukan</th>
-                                            <th>Ditujukan</th>
-                                            <th>Yang bertandatangan</th> --}}
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <form role="form" class="form-horizontal" action="{{url('/insert-surat')}} " method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                    <hr>
 
-                                        @foreach ($data as $key => $datas)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $datas->warga_negara }}</td>
-                                                <td>{{ $datas->nama }}</td>
-                                                <td>{{ $datas->jabatan }}</td>
-                                                <td>{{ date('d-M-Y', strtotime($datas->tgl_lahir)) }}</td>
-                                                <td>{{ $datas->kebangsaan }}</td>
-                                                <td>{{ $datas->no_paspor }}</td>
-                                                <td>{{ $datas->tujuan }}</td>
-                                                <td>{{ $datas->keperluan }}</td>
-                                                <td>{{ date('d-M-Y', strtotime($datas->berlaku)) }}</td>
-                                                <td class="text-center">
-                                                    <ul class="icons-list">
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle"
-                                                                data-toggle="dropdown">
-                                                                <i class="icon-menu9"></i>
-                                                            </a>
+									<div class="form-group">
+										<label class="control-label col-lg-2">Nama</label>
+										<div class="col-lg-10">
+											<input type="text" class="form-control" name="nama" placeholder="Masukkan nama">
+										</div>
+									</div>
 
-                                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                                <li><a href="fill-data-pdf/{{ $datas->id }}"
-                                                                        target="_blank"><i class="icon-file-pdf"></i>
-                                                                        Export to
-                                                                        .pdf</a></li>
+									<div class="form-group">
+										<label class="control-label col-lg-2">Jabatan</label>
+										<div class="col-lg-10">
+											<input type="text" class="form-control" name="jabatan" placeholder="Masukkan jabatan">
+										</div>
+									</div>
 
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+									<div class="form-group">
+										<label class="control-label col-lg-2">Tanggal Lahir</label>
+										<div class="col-lg-10">
+											<input type="date" class="form-control" name="tgl_lahir" >
+										</div>
+									</div>
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <div class="form-group">
+			                        	<label class="control-label col-lg-2">Warga Negara</label>
+			                        	<div class="col-lg-10">
+				                            <select name="select_negara" class="form-control">
+				                                <option value="">--Pilih Negara--</option>
+				                                <option value="Arab Saudi">Arab Saudi</option>
+				                                <option value="Amerika Serikat">Amerika Serikat</option>
+				                                <option value="Australia">Australia</option>
+				                                <option value="Belanda">Belanda</option>
+				                                <option value="Cina">Cina</option>
+				                                <option value="Korea">Korea</option>
+				                            </select>
+			                            </div>
+			                        </div>
+                                    
+                                    <div class="form-group">
+			                        	<label class="control-label col-lg-2">Kebangsaan</label>
+			                        	<div class="col-lg-10">
+				                            <select name="select_kebangsaan" class="form-control">
+				                                <option value="">--Pilih Kebangsaan--</option>
+				                                <option value="Arab Saudi">Arab Saudi</option>
+				                                <option value="Amerika Serikat">Amerika Serikat</option>
+				                                <option value="Australia">Australia</option>
+				                                <option value="Belanda">Belanda</option>
+				                                <option value="Cina">Cina</option>
+				                                <option value="Korea">Korea</option>
+				                            </select>
+			                            </div>
+			                        </div>
+                                    
+
+									<div class="form-group">
+										<label class="control-label col-lg-2">No.Paspor</label>
+										<div class="col-lg-10">
+											<input type="text" class="form-control" name="paspor" placeholder="Masukkan paspor">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-lg-2">Tujuan</label>
+										<div class="col-lg-10">
+											<input type="text" class="form-control" name="tujuan" placeholder="Masukkan tujuan">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-lg-2">Keperluan</label>
+										<div class="col-lg-10">
+											<textarea rows="5" cols="5" class="form-control" name="keperluan" placeholder="Masukkan keperluan"></textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-lg-2">Tanggal Berlaku</label>
+										<div class="col-lg-10">
+											<input type="date" class="form-control" name="tgl_berlaku" >
+										</div>
+									</div>
+
+								
+
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+								</div>
+							</form>
                         </div>
                     </div>
                     <!-- /basic datatable -->

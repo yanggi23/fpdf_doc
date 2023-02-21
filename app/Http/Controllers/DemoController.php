@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Surat_keterangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use setasign\Fpdi\Fpdi;
 
 class DemoController extends Controller
@@ -37,8 +38,12 @@ class DemoController extends Controller
             //$text = "YANGGOI";
             if ($i == '1') {
 
-                $fpdi->Text(65, 122, "Surat Keputusan TNI Nomor R/109/IX/2022 tanggal 9 September");
-                $fpdi->Text(25, 127, "2022 tentang Permohonan Penerbitan Security Clearance");
+
+                $fpdi->SetY(118);
+                $fpdi->SetX(25);
+                $fpdi->MultiCell(165, 6, "                          Surat Keputusan TNI Nomor R/109/IX/2022 tanggal 9 September 2022 tentang Permohonan Penerbitan Security Clearance");
+                // $fpdi->Text(65, 122, "Surat Keputusan TNI Nomor R/109/IX/2022 tanggal 9 September");
+                // $fpdi->Text(25, 127, "2022 tentang Permohonan Penerbitan Security Clearance");
 
 
                 $fpdi->Text(103, 150, $data->warga_negara);
@@ -48,7 +53,11 @@ class DemoController extends Controller
                 $fpdi->Text(80, 189, $data->kebangsaan);
                 $fpdi->Text(80, 196,  $data->no_paspor);
                 $fpdi->Text(80, 209,  $data->tujuan);
-                $fpdi->Text(80, 220,  $data->keperluan);
+
+                $fpdi->SetY(216);
+                $fpdi->SetX(79);
+                $fpdi->MultiCell(110, 5,  $data->keperluan);
+                
                 $fpdi->Text(80, 231.5, date('d F Y', strtotime($data->berlaku)));
             }
             if ($i == '2') {
@@ -72,5 +81,81 @@ class DemoController extends Controller
         $data = Surat_keterangan::get();
 
         return view("isi_data_pdf", compact('data'));
+    }
+
+    public function create()
+    {
+        return view('add-surat');
+    }
+
+    public function store(Request $request)
+    {
+        // $validatedData = $request->validate([
+        //     'nama' => 'required',
+        //     'jabatan' => 'required',
+        //     'tgl_lahir' => 'required',
+        //     'kebangsaan' => 'required',
+        //     'no_paspor' => 'required',
+        //     'tujuan' => 'required',
+        //     'keperluan' => 'required',
+        //     'berlaku' => 'required',
+        //     // 'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
+        //     // 'address' => 'required|max:255',
+        // ]);
+
+        
+        // $data = Surat_keterangan::create([
+        //     'nama' => $request->nama,
+        //     'jabatan' => $request->jabatan,
+        //     'tgl_lahir' => $request->tgl_lahir,
+        //     'kebangsaan' => $request->kebangsaan,
+        //     'no_paspor' => $request->paspor,
+        //     'tujuan' => $request->tujuan,
+        //     'keperluan' => $request->keperluan,
+        //     'berlaku' => $request->tgl_berlaku,
+        //     // 'image' => $request->image,
+        //     // 'address' => $request->address
+            
+        // ]);
+
+        $data = array();
+        $data['warga_negara'] = $request->select_negara;
+        $data['nama'] = $request->nama;
+        $data['jabatan'] = $request->jabatan;
+        $data['tgl_lahir'] = $request->tgl_lahir;
+        $data['kebangsaan'] = $request->select_kebangsaan;
+        $data['no_paspor'] = $request->paspor;
+        $data['tujuan'] = $request->tujuan;
+        $data['keperluan'] = $request->keperluan;
+        $data['berlaku'] = $request->tgl_berlaku;
+            // 'image' = $request->image,
+            // 'address' = $request->address
+            
+
+        $insert = DB::table('surat_keterangan')->insert($data);
+        // $data->save();
+
+        if ($request) 
+        {
+            $notification=array(
+                'messege'=>'Successfully User Created',
+                'alert-type'=>'success'
+            );
+            return redirect()->route('allsurat')->with($notification);
+        }
+        else {
+            $notification=array(
+                'messege'=>'Something is wrong, please try again!',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('allsurat')->with($notification);
+        }
+
+        // $notification=array(
+        //     'messege'=>'Successfully Data Created',
+        //     'alert-type'=>'success'
+        // );
+        // return redirect()->route('allsurat')->with($notification);
+        
     }
 }
