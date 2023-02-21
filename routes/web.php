@@ -28,4 +28,4 @@ use App\Http\Controllers\DemoController;
 //     exit;
 // });
 Route::get('/', [DemoController::class, 'datatabel']);
-Route::get('fill-data-pdf', [DemoController::class, 'index']);
+Route::get('fill-data-pdf/{id}', [DemoController::class, 'index']);

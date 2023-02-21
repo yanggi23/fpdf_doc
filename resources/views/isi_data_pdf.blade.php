@@ -472,7 +472,7 @@
                     <!-- Basic datatable -->
                     <div class="panel panel-flat">
                         <div class="panel-heading">
-                            <h5 class="panel-title">Data PDF</h5>
+                            <h5 class="panel-title">Data Surat Keterangan Security Clearance</h5>
                             {{-- <div class="heading-elements">
                                 <ul class="icons-list">
                                     <li><a data-action="collapse"></a></li>
@@ -490,48 +490,67 @@
                             will be immediately added to the table, as shown in this example. <strong>Datatables support
                                 all available table styling.</strong>
                         </div> --}}
-
-                        <table class="table datatable-basic">
-                            <thead>
-                                <tr>
-                                    <th>Berdasarkan</th>
-                                    <th>Negara</th>
-                                    <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>Tgl lahir</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for ($i = 0; $i < 10; $i++)
+                        <div class="table-responsive">
+                            <table class="table datatable-basic">
+                                <thead>
                                     <tr>
-                                        <td>Marth</td>
-                                        <td><a href="#">Enright</a></td>
-                                        <td>Traffic Court Referee</td>
-                                        <td>22 Jun 1972</td>
-                                        <td><span class="label label-success">Active</span></td>
-                                        <td class="text-center">
-                                            <ul class="icons-list">
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <ul class="dropdown-menu dropdown-menu-right">
-                                                        <li><a href="fill-data-pdf" target="_blank"><i
-                                                                    class="icon-file-pdf"></i>
-                                                                Export to
-                                                                .pdf</a></li>
-
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </td>
+                                        {{-- <th>Berdasarkan</th> --}}
+                                        <th>No</th>
+                                        <th>Warga Negara</th>
+                                        <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Tgl lahir</th>
+                                        <th>Kebangsaan</th>
+                                        <th>No Paspor</th>
+                                        <th>Tujuan</th>
+                                        <th>Keperluan</th>
+                                        <th>Berlaku</th>
+                                        {{-- <th>Tempat Surat</th>
+                                        <th>Tanggal Surat</th>
+                                        <th>Ditujukan</th>
+                                        <th>Ditujukan</th>
+                                        <th>Yang bertandatangan</th> --}}
+                                        <th class="text-center">Actions</th>
                                     </tr>
-                                @endfor
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                    @foreach ($data as $key => $datas)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $datas->warga_negara }}</td>
+                                            <td>{{ $datas->nama }}</td>
+                                            <td>{{ $datas->jabatan }}</td>
+                                            <td>{{ date('d-M-Y', strtotime($datas->tgl_lahir)) }}</td>
+                                            <td>{{ $datas->kebangsaan }}</td>
+                                            <td>{{ $datas->no_paspor }}</td>
+                                            <td>{{ $datas->tujuan }}</td>
+                                            <td>{{ $datas->keperluan }}</td>
+                                            <td>{{ date('d-M-Y', strtotime($datas->berlaku)) }}</td>
+                                            <td class="text-center">
+                                                <ul class="icons-list">
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-menu9"></i>
+                                                        </a>
+
+                                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                            <li><a href="fill-data-pdf/{{ $datas->id }}"
+                                                                    target="_blank"><i class="icon-file-pdf"></i>
+                                                                    Export to
+                                                                    .pdf</a></li>
+
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- /basic datatable -->
 
