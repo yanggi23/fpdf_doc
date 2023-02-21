@@ -6,6 +6,7 @@ use App\Models\Surat_keterangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use setasign\Fpdi\Fpdi;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class DemoController extends Controller
 {
@@ -33,9 +34,7 @@ class DemoController extends Controller
             $fpdi->useTemplate($template);
             $fpdi->SetFont("helvetica", "", 12);
             $fpdi->SetTextColor(0, 0, 0);
-            // $left = 10;
-            //  $top = 10;
-            //$text = "YANGGOI";
+
             if ($i == '1') {
 
 
@@ -53,11 +52,9 @@ class DemoController extends Controller
                 $fpdi->Text(80, 189, $data->kebangsaan);
                 $fpdi->Text(80, 196,  $data->no_paspor);
                 $fpdi->Text(80, 209,  $data->tujuan);
-
-                $fpdi->SetY(216);
+                $fpdi->SetY(216.5);
                 $fpdi->SetX(79);
                 $fpdi->MultiCell(110, 5,  $data->keperluan);
-                
                 $fpdi->Text(80, 231.5, date('d F Y', strtotime($data->berlaku)));
             }
             if ($i == '2') {
