@@ -419,7 +419,7 @@
                 <div class="page-header">
                     <div class="page-header-content">
                         <div class="page-title">
-                            <h4><i class="icon-arrow-left52 position-left"></i> <span
+                            <h4><a href="{{URL::previous()}}" class="icon-arrow-left52 position-left"></a> <span
                                     class="text-semibold">Datatables</span> - Basic</h4>
                         </div>
 

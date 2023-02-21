@@ -419,8 +419,7 @@
                 <div class="page-header">
                     <div class="page-header-content">
                         <div class="page-title">
-                            <h4><i class="icon-arrow-left52 position-left"></i> <span
-                                    class="text-semibold">Datatables</span> - Basic</h4>
+                            {{-- <h4><span class="text-semibold">Datatables</span> - Basic</h4> --}}
                         </div>
 
                         {{-- <div class="heading-elements">
