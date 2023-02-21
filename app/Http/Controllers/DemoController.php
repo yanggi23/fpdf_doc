@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Surat_keterangan;
 use Illuminate\Http\Request;
 use setasign\Fpdi\Fpdi;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class DemoController extends Controller
 {
@@ -32,15 +33,12 @@ class DemoController extends Controller
             $fpdi->useTemplate($template);
             $fpdi->SetFont("helvetica", "", 12);
             $fpdi->SetTextColor(0, 0, 0);
-            // $left = 10;
-            //  $top = 10;
-            //$text = "YANGGOI";
+
             if ($i == '1') {
 
-                $fpdi->Text(65, 122, "Surat Keputusan TNI Nomor R/109/IX/2022 tanggal 9 September");
-                $fpdi->Text(25, 127, "2022 tentang Permohonan Penerbitan Security Clearance");
-
-
+                $fpdi->SetY(118);
+                $fpdi->SetX(25);
+                $fpdi->MultiCell(165, 6, "                          " . "Surat Keputusan TNI Nomor R/109/IX/2022 tanggal 9 September 2022 tentang Permohonan Penerbitan Security Clearance");
                 $fpdi->Text(103, 150, $data->warga_negara);
                 $fpdi->Text(80, 167, $data->nama);
                 $fpdi->Text(80, 174, $data->jabatan);
@@ -48,7 +46,9 @@ class DemoController extends Controller
                 $fpdi->Text(80, 189, $data->kebangsaan);
                 $fpdi->Text(80, 196,  $data->no_paspor);
                 $fpdi->Text(80, 209,  $data->tujuan);
-                $fpdi->Text(80, 220,  $data->keperluan);
+                $fpdi->SetY(216.5);
+                $fpdi->SetX(79);
+                $fpdi->MultiCell(110, 5,  $data->keperluan);
                 $fpdi->Text(80, 231.5, date('d F Y', strtotime($data->berlaku)));
             }
             if ($i == '2') {

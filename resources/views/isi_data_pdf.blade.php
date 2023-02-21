@@ -491,7 +491,7 @@
                                 all available table styling.</strong>
                         </div> --}}
                         <div class="table-responsive">
-                            <table class="table datatable-basic">
+                            <table class="table datatable-basic table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         {{-- <th>Berdasarkan</th> --}}
